@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 //  GraphQL express middleware
 const { graphiqlExpress, graphqlExpress } = require('apollo-server-express');
 const { makeExecutableSchema } = require('graphql-tools');
@@ -26,6 +27,11 @@ mongoose
 // Initialize express 
 const app = express();
 const PORT = process.env.PORT || 3333;
+
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}));
 
 // Create Graphiql application
 app.use('/graphiql', graphiqlExpress({endpointURL: '/graphql' }))
