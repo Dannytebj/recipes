@@ -24,6 +24,10 @@ type Query {
   getAllRecipes: [Recipe]
 }
 
+type Token {
+  token: String!
+}
+
 type Mutation {
   addRecipe(
     name: String!, 
@@ -32,5 +36,11 @@ type Mutation {
     instructions: String!
     username: String
   ): Recipe
+
+  signinUser(username:String!, password: String!): Token
+  signupUser(
+    email: String!, 
+    username:String!,
+    password: String!): Token
 }
 `;
