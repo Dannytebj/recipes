@@ -36,9 +36,8 @@ app.use(cors({
 //  Setup JWT Middleware
 app.use(async(req, res, next) => {
   const token = req.headers["authorization"];
-  console.log(token);
   next();
-})
+});
 
 // Create Graphiql application
 app.use('/graphiql', graphiqlExpress({endpointURL: '/graphql' }))
@@ -52,7 +51,7 @@ graphqlExpress({
     Recipe,
     User
   }
-}))
+}));
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

@@ -19,19 +19,19 @@ class Signin extends Component {
     this.setState({
       [event.target.name]: event.target.value
     });
-  }
+  };
   handleSubmit = (event, signinUser) => {
     event.preventDefault();
     signinUser().then(({ data: { signinUser }}) => {
       this.clearState();
       localStorage.setItem('token', signinUser.token);
     })
-  }
+  };
   validateForm = () => {
     const { username, password } = this.state;
     const isInvalid = !username || !password;
     return isInvalid;
-  }
+  };
   render() {
     const { username, password } = this.state;
     return (
