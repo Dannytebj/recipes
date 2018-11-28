@@ -1,3 +1,6 @@
 import React from 'react';
 
-export default Error = ({ error }) => (<p>{error.message}</p>)
+export default Error = ({ error }) => {
+  console.log(error);
+ return (<p>{error.message}</p>) 
+}
