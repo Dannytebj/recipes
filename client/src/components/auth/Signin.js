@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Mutation } from 'react-apollo';
 import { SIGNIN_USER } from '../../queries';
 import Error from '../commons/Error';
@@ -22,9 +23,11 @@ class Signin extends Component {
   };
   handleSubmit = (event, signinUser) => {
     event.preventDefault();
-    signinUser().then(({ data: { signinUser }}) => {
-      this.clearState();
+    signinUser().then(async ({ data: { signinUser }}) => {
       localStorage.setItem('token', signinUser.token);
+      await this.props.refetch();
+      this.clearState();
+      this.props.history.push('/');
     })
   };
   validateForm = () => {
@@ -35,8 +38,8 @@ class Signin extends Component {
   render() {
     const { username, password } = this.state;
     return (
-      <div className="App">
-        <h2 className="App">Sign up</h2>
+      <div className="auth-wrapper">
+        <h2 className="header-label">Sign In</h2>
         <Mutation mutation={SIGNIN_USER} variables={{ username, password }}>
           {(signinUser, { data, loading, error }) => {
             return (
@@ -66,4 +69,4 @@ class Signin extends Component {
   }
 }
 
-export default Signin;
+export default withRouter(Signin);

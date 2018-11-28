@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Mutation } from 'react-apollo';
 import { SIGNUP_USER } from '../../queries';
 import Error from '../commons/Error';
@@ -23,9 +24,12 @@ class Signup extends Component {
   }
   handleSubmit = (event, signupUser) => {
     event.preventDefault();
-    signupUser().then(({data: { signupUser }}) => {
-      this.clearState();
+    console.log(this.state)
+    signupUser().then(async({ data: { signupUser }}) => {
       localStorage.setItem('token', signupUser.token);
+      await this.props.refetch();
+      this.clearState();
+      this.props.history.push('/');
     })
   }
   validateForm = () => {
@@ -36,8 +40,8 @@ class Signup extends Component {
   render() {
     const { username, email, password, confirmPassword } = this.state;
     return (
-      <div className="App">
-        <h2 className="App">Sign up</h2>
+      <div className="auth-wrapper">
+        <h2 className="header-label">Sign up</h2>
         <Mutation mutation={SIGNUP_USER} variables={{ username, email, password }}>
           {(signupUser, { data, loading, error }) => {
             return (
@@ -70,7 +74,7 @@ class Signup extends Component {
                   onChange={this.handleChange}
                   value={confirmPassword}
                 />
-                <button type="submit" className="button-primary" disabled={ loading || this.validateForm()}>Submit</button>
+                <button type="submit" id="submit" className="button-primary" disabled={ loading || this.validateForm()}>Submit</button>
                 { error && <Error error={error} />}
               </form>
             )
@@ -81,4 +85,4 @@ class Signup extends Component {
   }
 }
 
-export default Signup;
+export default withRouter(Signup);

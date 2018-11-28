@@ -16,12 +16,13 @@ type User {
   username: String! @unique
   password: String!
   email: String! @unique
-  joinDates: String
+  joinDate: String
   favorites: [Recipe]
 }
 
 type Query {
   getAllRecipes: [Recipe]
+  getCurrentUser: User
 }
 
 type Token {

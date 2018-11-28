@@ -2,16 +2,26 @@ import { gql } from 'apollo-boost';
 
 /* Recipe Queries */
 export const GET_ALL_RECIPES = gql`
-query {
-  getAllRecipes {
-    name 
-    category
-    description
-    instructions    
-    username   
+  query {
+    getAllRecipes {
+      name 
+      category
+      description
+      instructions    
+      username   
+    }
   }
-}
 `;
+
+export const GET_CURRENT_USER = gql`
+  query {
+    getCurrentUser {
+      username,
+      email,
+      joinDate
+    }
+  }
+`
 /* Recipe Mutations */
 
 /* User Queries */

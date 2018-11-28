@@ -1,0 +1,16 @@
+{
+    "extends": "eslint-config-airbnb",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true,
+            "arrowFunctions": true
+        }
+    },
+    "rules": {
+        "semi": 2,
+        "arrow-body-style": ["error", "as-needed"],
+        "object-curly-newline":"off"
+    }
+}
