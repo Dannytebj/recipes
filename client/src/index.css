@@ -10,6 +10,7 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
 nav {
   text-align: center;
   padding-top: 1em;
@@ -55,6 +56,14 @@ text-align: center;
 .form {
   display: flex;
   flex-direction: column;
+}
+.search-results  {
+  padding: 10px;
+  text-align: center;
+}
+.search-results li {
+  background: white;
+  border-radius: 10px;
 }
 #submit:disabled {
   background: #ccc;
